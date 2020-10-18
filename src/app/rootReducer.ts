@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import studentsReducer from '../features/students.slice';
+import studentsReducer from '../features/students/students.slice';
 
 const rootReducer = combineReducers({
     students: studentsReducer

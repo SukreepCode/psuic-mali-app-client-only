@@ -3,10 +3,12 @@ import "./App.css";
 
 import { useSelector, useDispatch } from "react-redux";
 
+import { Button } from 'antd';
+
 import { 
   selectStudents,
   fetchStudents,
- } from "../features/students.slice";
+ } from "../features/students/students.slice";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +27,8 @@ function App() {
         <div key={e.id}>{e.name}</div>
       ))}
       <button onClick={()=>dispatch(fetchStudents())}>rrgrg</button>
+      <Button type="primary">Primary Button</Button>
+    
     </div>
   );
 }
