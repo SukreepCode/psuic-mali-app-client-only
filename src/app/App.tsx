@@ -1,16 +1,28 @@
 import React from "react";
 import "./App.css";
-import { Button } from "antd";
 import StudentPage from '../features/students/StudentsPage';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      {/* {students} */}
-      <Button type="primary">Primary Button</Button>
+     <Router>
 
-      <StudentPage />
-    </div>
+      <Switch>
+        <Route exact path="/">
+          <StudentPage />
+        </Route>
+
+        <Route path="/students">
+          <StudentPage />
+        </Route>
+
+      </Switch>
+    </Router>
   );
 }
 
