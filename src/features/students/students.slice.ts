@@ -13,7 +13,7 @@ const initialState: StateType = {
     data: []
 };
 
-export const counterSlice = createSlice({
+export const studentSlice = createSlice({
     name: 'students',
     initialState,
     reducers: {
@@ -26,7 +26,7 @@ export const counterSlice = createSlice({
 
 export const {
     updateStudents
-} = counterSlice.actions;
+} = studentSlice.actions;
 
 // Async actions
 
@@ -39,4 +39,4 @@ export function fetchStudents(){
 
 export const selectStudents = (state: RootState) => state.students;
 
-export default counterSlice.reducer;
+export default studentSlice.reducer;
