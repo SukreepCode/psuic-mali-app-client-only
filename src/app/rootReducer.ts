@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import studentsReducer from '../features/students/students.slice';
+import StudentReducer from '../features/students/students.slice';
 
 const rootReducer = combineReducers({
-    students: studentsReducer
+    students: StudentReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>;

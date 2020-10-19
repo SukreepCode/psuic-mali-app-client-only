@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import AdminLayout from "../layouts/admin/AdminLayout";
-import { selectStudents, fetchStudents } from "./students.slice";
+import * as Student from "./students.slice";
 
 import { Table, Button } from "antd";
 
@@ -9,10 +9,9 @@ type AppProps = { message?: string };
 
 const StudentPage = ({ message }: AppProps) => {
   const dispatch = useDispatch();
-  const students = useSelector(selectStudents);
-
+  const students = useSelector(Student.selector);
   useEffect(() => {
-    dispatch(fetchStudents());
+    dispatch(Student.fetch());
   }, []);
 
   const columns = [
@@ -32,8 +31,7 @@ const StudentPage = ({ message }: AppProps) => {
     <AdminLayout>
       <h1>Students Data</h1>
       <Table columns={columns} dataSource={students.data} />
-
-      <Button onClick={() => dispatch(fetchStudents())}>Reload Data</Button>
+      <Button onClick={() => dispatch(Student.fetch())}>Reload Data</Button>
     </AdminLayout>
   );
 };

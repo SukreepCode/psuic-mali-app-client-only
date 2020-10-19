@@ -14,16 +14,16 @@ const initialState: StateType = {
 // Pure actions
 
 const reducers = {
-    updateStudents: (state: any, { payload }: PayloadAction<Student[]>) => {
+    update: (state: any, { payload }: PayloadAction<Student[]>) => {
         state.data = payload;
     },
 };
 
 // Async actions
 
-export const fetchStudents = () => async (dispatch: any) => {
+export const fetch = () => async (dispatch: any) => {
     const { data } = await studentService.getAll();
-    dispatch(updateStudents(data));
+    dispatch(actions.update(data));
 };
 
 // Setup Slice
@@ -33,12 +33,6 @@ const slice = createSlice({
     reducers,
 });
 
-// Export actions
-export const {
-    updateStudents
-} = slice.actions;
-
-// Export selector for accessing the state data
-export const selectStudents = (state: RootState) => state.students;
-// Export reducer
+export const selector = (state: RootState) => state.students;
+export const actions =  slice.actions;
 export default slice.reducer;

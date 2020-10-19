@@ -7,7 +7,6 @@ const { useBreakpoint } = Grid;
 
 const LeftMenu = () => {
   const { md } = useBreakpoint();
-  console.log("test => ", md);
   return (
     <Menu mode={md ? "horizontal" : "inline"}>
       <Menu.Item key="mail">
