@@ -9,7 +9,7 @@ const { useBreakpoint } = Grid;
 const RightMenu = () => {
   const { md } = useBreakpoint();
   return (
-    <Menu mode="horizontal">
+    <Menu theme="dark" mode="horizontal" className="menu-background">
       <SubMenu key="account" title={<span>Hi!, Thada <Avatar size="small" icon={<UserOutlined />} /></span>}>
       <Menu.Item key="account:logout">Logout</Menu.Item>
       </SubMenu>

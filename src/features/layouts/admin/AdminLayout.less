@@ -1,68 +1,108 @@
 @import "../../../app/App.less";
 
+@text-color-navbar: #ffffff;
+
 .background{
     background-color: @layout-body-background;
     height: 100vh;
 }
 
-.menuBar {
-  padding: 0 20px;
-  border-bottom: solid 1px #e8e8e8;
-  overflow: auto;
-  box-shadow: 0 0 30px #f3f1f1;
-  min-height: 60px;
-  background-color: #fff;
-}
-
 .logo {
-  width: 150px;
+  width: 60px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
   float: left;
 }
 
-.logo a {
-  display: inline-block;
-  font-size: 20px;
-  padding: 19px 20px;
-  text-transform: capitalize;
+.leftMenu {
 }
 
-.menuCon {
-  width: 100%;
-  display: flex;
-//   width: calc(100% - 150px);
-//   float: left;
-}
-
-.menuCon .ant-menu{
-    margin: 10px;
-}
-
-.menuCon .ant-menu-item {
-  padding: 0px 5px;
-  margin-top: 10px;
-}
-
-.menuCon .ant-menu-submenu-title {
-  padding: 10px 20px;
-}
-
-.menuCon .ant-menu-item a,
-.menuCon .ant-menu-submenu-title a {
-  padding: 10px 15px;
-}
-
-.menuCon .ant-menu-horizontal {
-  border-bottom: none;
-}
-
-.menuCon .leftMenu {
-  float: left;
-}
-
-.menuCon .rightMenu {
-  float: right;
+.rightMenu {
   margin-left: auto;
 }
+
+.trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: @text-color-navbar;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.ant-drawer-content{
+  // dark theme
+  background-color: @layout-header-background;
+}
+
+// .menuBar {
+//   padding: 0 20px;
+//   border-bottom: solid 1px #e8e8e8;
+//   overflow: auto;
+//   box-shadow: 0 0 30px #f3f1f1;
+//   min-height: 60px;
+//   background-color: @primary-color;
+// }
+
+// .logo {
+//   width: 150px;
+//   float: left;
+// }
+
+// .logo a {
+//   display: inline-block;
+//   font-size: 20px;
+//   padding: 19px 20px;
+//   text-transform: capitalize;
+//   color: #e8e8e8;
+// }
+
+// .menuCon {
+//   width: 100%;
+//   display: flex;
+// }
+
+// .menuCon .menu-background {
+//   background-color: @primary-color;
+//   color: @text-color-navbar;
+// }
+
+// .menuCon .ant-menu{
+//     margin: 10px;
+// }
+
+// .menuCon .ant-menu-item {
+//   padding: 0px 5px;
+//   margin-top: 10px;
+//   color: @text-color-navbar;
+// }
+
+// .menuCon .ant-menu-submenu-title {
+//   padding: 10px 20px;
+// }
+
+// .menuCon .ant-menu-item a,
+// .menuCon .ant-menu-submenu-title a {
+//   padding: 10px 15px;
+//   color: @text-color-navbar;
+// }
+
+// .menuCon .ant-menu-horizontal {
+//   border-bottom: none;
+// }
+
+// .menuCon .leftMenu {
+//   float: left;
+// }
+
+// .menuCon .rightMenu {
+//   float: right;
+//   margin-left: auto;
+// }
 
 .barsMenu {
   float: left;
@@ -81,63 +121,67 @@
   position: relative;
 }
 
-.barsBtn:after,
-.barsBtn:before {
-  content: attr(x);
-  width: 20px;
-  position: absolute;
-  top: -6px;
-  left: 0;
-  height: 2px;
-  background: #1890ff;
-}
+// .barsBtn:after,
+// .barsBtn:before {
+//   content: attr(x);
+//   width: 20px;
+//   position: absolute;
+//   top: -6px;
+//   left: 0;
+//   height: 2px;
+//   background: #1890ff;
+// }
 
-.barsBtn:after {
-  top: auto;
-  bottom: -6px;
-}
+// .barsBtn:after {
+//   top: auto;
+//   bottom: -6px;
+// }
 
-.ant-drawer-body {
-  padding: 0;
-}
+// .ant-drawer-body {
+//   padding: 0;
+// }
 
-.barsMenu > span {
-  display: block;
-}
+// .barsMenu > span {
+//   display: block;
+// }
 
-.ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
-.ant-drawer-body .ant-menu-horizontal > .ant-menu-submenu {
-  display: inline-block;
-  width: 100%;
-}
+// .ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
+// .ant-drawer-body .ant-menu-horizontal > .ant-menu-submenu {
+//   display: inline-block;
+//   width: 100%;
+// }
 
-.ant-drawer-body .ant-menu-horizontal {
-  border-bottom: none;
-}
+// .ant-drawer-body .ant-menu-horizontal {
+//   border-bottom: none;
+// }
 
-.ant-drawer-body .ant-menu-horizontal > .ant-menu-item:hover {
-  border-bottom-color: transparent;
-}
+// .ant-drawer-body .ant-menu-horizontal > .ant-menu-item:hover {
+//   border-bottom-color: transparent;
+// }
 
-@media (max-width: 767px) {
-  .barsMenu {
-    display: inline-block;
+@media (max-width: @screen-sm) {
+  .ant-layout-header{
+    padding: 0 !important;
   }
 
-  .leftMenu{
-    display: none;
-  }
+  // .barsMenu {
+  //   display: inline-block;
+  // }
 
-  .logo a {
-    margin-left: -20px;
-  }
+  // .leftMenu{
+  //   display: none;
+  // }
 
-  .menuCon .ant-menu-item,
-  .menuCon .ant-menu-submenu-title {
-    padding: 1px 20px;
-  }
+  // .logo a {
+  //   margin-left: -20px;
+  // }
 
-  .logo a {
-    padding: 10px 20px;
-  }
+  // .menuCon .ant-menu-item,
+  // .menuCon .ant-menu-submenu-title {
+  //   padding: 1px 20px;
+  // }
+
+  // .logo a {
+  //   padding: 10px 20px;
+  // }
 }

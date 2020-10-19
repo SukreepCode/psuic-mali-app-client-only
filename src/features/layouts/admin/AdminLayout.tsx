@@ -7,6 +7,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
+  MenuOutlined,
 } from "@ant-design/icons";
 import "./AdminLayout.less";
 import LeftMenu from "./LeftMenu";
@@ -34,29 +35,49 @@ const AdminLayout = ({ message, children }: AppProps) => {
 
   const showDrawer = () => {
     setVisible(true);
+    console.log("efef");
   };
 
   return (
+
     <div className="background">
-      <nav className="menuBar">
-        <div className="menuCon">
-          {!md && (
-            <Button className="barsMenu" type="text" onClick={showDrawer}>
-              <span className="barsBtn"></span>
-            </Button>
-          )}
 
-          <div className="logo">
-            <a href="">logo</a>
-          </div>
-          <div className="leftMenu">
-            <LeftMenu />
-          </div>
-          <div className="rightMenu">
-            <RightMenu />
+      <Layout >
+        <Header>
+          <div style={{ "display": "flex" }}>
+            {!md &&
+              // <Button className="barsMenu" type="text" onClick={showDrawer}>
+              //   <span className="barsBtn"></span>
+              // </Button>
+
+              // <Button className="trigger" icon={<MenuUnfoldOutlined />} />
+              // <MenuUnfoldOutlined className="trigger" />
+              <div className="trigger" onClick={showDrawer}>
+                <MenuOutlined   />
+              </div>
+              // React.createElement(!visible ? MenuUnfoldOutlined : MenuFoldOutlined, {
+              //   className: 'trigger',
+              //   onClick: showDrawer,
+              // })
+            }
+            <div className="logo" />
+
+            {md &&
+              <LeftMenu />}
+            <div className="rightMenu">
+              <RightMenu /></div>
           </div>
 
-          <Drawer
+
+          {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+            <Menu.Item key="1">nav 1</Menu.Item>
+            <Menu.Item key="2">nav 2</Menu.Item>
+            <Menu.Item key="3">nav 3</Menu.Item>
+          </Menu> */}
+        </Header>
+
+
+        <Drawer
             title="Basic Drawer"
             placement="left"
             closable={false}
@@ -65,13 +86,14 @@ const AdminLayout = ({ message, children }: AppProps) => {
           >
             <LeftMenu />
           </Drawer>
-        </div>
-      </nav>
-      <Content>
-        <div className="container">
-          <div className="site-layout-content">{children}</div>
-        </div>
-      </Content>
+        
+
+        <Content>
+          <div className="container">
+            <div className="site-layout-content">{children}</div>
+          </div>
+        </Content>
+      </Layout>
     </div>
   );
 };
