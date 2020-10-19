@@ -1,6 +1,7 @@
 import React from "react";
-import "./App.css";
+import "./App.less";
 import StudentPage from '../features/students/StudentsPage';
+import LoginPage from '../features/login/LoginPage';
 
 import {
   BrowserRouter as Router,
@@ -14,7 +15,7 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <StudentPage />
+          <LoginPage />
         </Route>
 
         <Route path="/students">

@@ -17,6 +17,7 @@ const StudentPage = ({ message }: AppProps) => {
 
   return (
     <div>
+  
       {students.data.map((e) => (
         <div key={e.id}>{e.name}</div>
       ))}
