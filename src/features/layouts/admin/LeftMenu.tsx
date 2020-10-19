@@ -8,7 +8,7 @@ const { useBreakpoint } = Grid;
 const LeftMenu = () => {
   const { md } = useBreakpoint();
   return (
-    <Menu theme="dark" mode={md ? "horizontal" : "inline"} defaultSelectedKeys={['home']} className="menu-background">
+    <Menu theme={md ? "dark" : "light"} mode={md ? "horizontal" : "inline"} defaultSelectedKeys={['home']} className="menu-background">
       <Menu.Item key="home">
         <a href="">Home</a>
       </Menu.Item>
