@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectStudents,
-  fetchStudents,
-} from "./students.slice";
+import AdminLayout from "../layouts/admin/AdminLayout";
+import { selectStudents, fetchStudents } from "./students.slice";
+
+import { Table, Button } from "antd";
 
 type AppProps = { message?: string };
 
@@ -15,14 +15,26 @@ const StudentPage = ({ message }: AppProps) => {
     dispatch(fetchStudents());
   }, []);
 
+  const columns = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+  ];
+
   return (
-    <div>
-  
-      {students.data.map((e) => (
-        <div key={e.id}>{e.name}</div>
-      ))}
-      <button onClick={() => dispatch(fetchStudents())}>fetch</button>
-    </div>
+    <AdminLayout>
+      <h1>Students Data</h1>
+      <Table columns={columns} dataSource={students.data} />
+
+      <Button onClick={() => dispatch(fetchStudents())}>Reload Data</Button>
+    </AdminLayout>
   );
 };
 

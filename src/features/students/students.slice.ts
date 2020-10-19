@@ -7,11 +7,10 @@ type StateType = {
     data: Student[]
 };
 
+// let id = 0;
+
 const initialState: StateType = {
-    data: [
-        { id: 0, name: "tesjiji efeft" },
-        { id: 1, name: " wefwee  f" },
-    ]
+    data: []
 };
 
 export const counterSlice = createSlice({

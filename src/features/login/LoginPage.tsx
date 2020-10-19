@@ -1,5 +1,6 @@
 import React from "react";
 import { Layout, Button, Row, Col, Form, Input, Checkbox } from "antd";
+import { useHistory } from "react-router-dom";
 import "./loginPage.less";
 
 type AppProps = { message?: string };
@@ -14,6 +15,12 @@ const tailLayout = {
 
 const LoginPage = ({ message }: AppProps) => {
   const { Header, Footer, Content } = Layout;
+  const history = useHistory();
+
+  function onFinish(values: any) {
+    console.log('Success:', values);
+    history.push('/students');
+  };
 
   return (
     <Layout>
@@ -24,7 +31,7 @@ const LoginPage = ({ message }: AppProps) => {
             {...layout}
             name="basic"
             initialValues={{ remember: true }}
-            onFinish={()=> {}}
+            onFinish={onFinish}
             onFinishFailed={()=> {}}
           >
             <Form.Item
@@ -60,7 +67,7 @@ const LoginPage = ({ message }: AppProps) => {
         </Col>
       </Row>
 
-      <Footer className="container">
+      <Footer className="container footer">
         Copyright@ PSUIC (Thada Wangthammang)
       </Footer>
     </Layout>
