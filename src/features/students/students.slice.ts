@@ -7,36 +7,38 @@ type StateType = {
     data: Student[]
 };
 
-// let id = 0;
-
 const initialState: StateType = {
     data: []
 };
 
-export const studentSlice = createSlice({
-    name: 'students',
-    initialState,
-    reducers: {
-        updateStudents: (state, { payload }: PayloadAction<Student[]>) => {
-            state.data = payload;
-        },
+// Pure actions
+
+const reducers = {
+    updateStudents: (state: any, { payload }: PayloadAction<Student[]>) => {
+        state.data = payload;
     },
-});
-
-
-export const {
-    updateStudents
-} = studentSlice.actions;
+};
 
 // Async actions
 
-export function fetchStudents(){
-    return async (dispatch: any) => {
-        const { data } = await studentService.getAll();
-        dispatch(updateStudents(data));
-    };
-}
+export const fetchStudents = () => async (dispatch: any) => {
+    const { data } = await studentService.getAll();
+    dispatch(updateStudents(data));
+};
 
+// Setup Slice
+const slice = createSlice({
+    name: 'students',
+    initialState,
+    reducers,
+});
+
+// Export actions
+export const {
+    updateStudents
+} = slice.actions;
+
+// Export selector for accessing the state data
 export const selectStudents = (state: RootState) => state.students;
-
-export default studentSlice.reducer;
+// Export reducer
+export default slice.reducer;
