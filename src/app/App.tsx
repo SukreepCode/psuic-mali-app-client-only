@@ -9,7 +9,7 @@ import {
 
 import StudentsPage from '../features/students/StudentsPage';
 import LoginPage from '../features/login/LoginPage';
-import StudentsAddForm from "../features/students/StudentAddForm";
+import StudentsAddForm from "../features/students/StudentsAddForm";
 
 function App() {
   return (
