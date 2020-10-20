@@ -1,7 +1,14 @@
 import React from "react";
-
+import { useHistory } from "react-router-dom";
 import { Form, Input, Button } from "antd";
 import AdminLayout from "../layouts/admin/AdminLayout";
+import { Student as StudentType } from "../../services/types";
+import { v4 as uuidv4 } from 'uuid';
+import { message  } from 'antd';
+
+import { useSelector, useDispatch } from "react-redux";
+import * as Student from "./students.slice";
+
 
 const layout = {
   labelCol: { span: 8 },
@@ -11,18 +18,38 @@ const layout = {
 type AppProps = { visible?: boolean; setVisible?: Function };
 
 export default ({ visible, setVisible }: AppProps) => {
+    
   const [confirmLoading, setConfirmLoading] = React.useState(false);
+  const dispatch = useDispatch();
+  //const students = useSelector(Student.selector);
+  const history = useHistory();
+
   const validateMessages = {
     required: "${label} is required!",
   };
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     setConfirmLoading(true);
     console.log(values);
-    setTimeout(() => {
-      setConfirmLoading(false);
-      }, 2000);
+
+    const entry =  {
+        id: uuidv4(),
+        name: values.user.name
+    }
     
+    try{
+        await dispatch(Student.addDatabase(entry));
+        Student.actions.add(entry);
+        history.goBack();
+    } catch(err) {
+        console.error(err);
+        message.error(`Can't add data: ${err}`);
+    }
+    setConfirmLoading(false);
+  };
+
+  const handleCancel = ()=> {
+    history.goBack();
   };
 
   return (
@@ -44,10 +71,15 @@ export default ({ visible, setVisible }: AppProps) => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+            
             <Button type="primary" htmlType="submit" loading={confirmLoading}>
               Submit
             </Button>
+            <Button style={{marginLeft: "20px"}} onClick={handleCancel}>
+              Cancel
+            </Button>
           </Form.Item>
+         
         </Form>
       </div>
     </AdminLayout>

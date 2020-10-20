@@ -15,6 +15,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.6",
+    "@types/uuid": "^8.3.0",
     "@types/webpack-env": "^1.15.3",
     "antd": "^4.7.0",
     "axios": "^0.20.0",
@@ -25,7 +26,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "redux-thunk": "^2.3.0",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "uuid": "^8.3.1"
   },
   "scripts": {
     "start": "craco start",
@@ -33,7 +35,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "dev": "run-p start mock",
-    "mock": "json-server --watch mock/db.json --port 3005"
+    "mock": "json-server --watch mock/db.json --port 3005 --delay 100"
   },
   "eslintConfig": {
     "extends": "react-app"

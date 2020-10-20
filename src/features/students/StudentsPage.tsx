@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import AdminLayout from "../layouts/admin/AdminLayout";
+
+import { useSelector, useDispatch } from "react-redux";
 import * as Student from "./students.slice";
 
 import { Table, Button, Row, Modal } from "antd";

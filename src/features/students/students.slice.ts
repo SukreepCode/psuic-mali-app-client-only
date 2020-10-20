@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/rootReducer';
 import studentService from '../../services/students.service';
+
 import { Student } from '../../services/types';
+import { AppThunk } from '../../app/store';
 
 type StateType = {
     data: Student[]
@@ -17,6 +19,9 @@ const reducers = {
     update: (state: any, { payload }: PayloadAction<Student[]>) => {
         state.data = payload;
     },
+    add: (state: any, { payload }: PayloadAction<Student>) => {
+        state.data.push(payload);
+    },
 };
 
 // Async actions
@@ -24,6 +29,11 @@ const reducers = {
 export const fetch = () => async (dispatch: any) => {
     const { data } = await studentService.getAll();
     dispatch(actions.update(data));
+};
+
+export const addDatabase = ( value: Student): AppThunk =>  (dispatch: any) => {
+        return studentService.add(value);
+        //dispatch(actions.add(value));
 };
 
 // Setup Slice
