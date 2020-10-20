@@ -5,7 +5,7 @@ import AdminLayout from "../layouts/admin/AdminLayout";
 
 import { useSelector, useDispatch } from "react-redux";
 import * as Student from "./students.slice";
-import StudentService from "../../services/students.service";
+import StudentService from "./students.service";
 
 import { Table, Button, Row, Space, Popconfirm, message } from "antd";
 

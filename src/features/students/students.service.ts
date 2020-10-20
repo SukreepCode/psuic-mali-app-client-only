@@ -1,7 +1,11 @@
-import http from './config';
-import { Student } from './types';
+import http from '../../services/config';
 
 const prefix = "students";
+
+export interface Student {
+  id: string;
+  name: string;
+}
 
 class StudentService {
   getAll() {

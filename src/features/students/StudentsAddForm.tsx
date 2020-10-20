@@ -7,7 +7,7 @@ import { message  } from 'antd';
 
 import { useSelector, useDispatch } from "react-redux";
 import * as Student from "./students.slice";
-import StudentService from "../../services/students.service";
+import StudentService from "./students.service";
 
 const layout = {
   labelCol: { span: 8 },

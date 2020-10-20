@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/rootReducer';
-import studentService from '../../services/students.service';
+import studentService from './students.service';
 
-import { Student } from '../../services/types';
+import { Student } from './students.service';
 import { AppThunk, AppDispatch } from '../../app/store';
 
 type StateType = {

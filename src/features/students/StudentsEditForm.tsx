@@ -6,7 +6,7 @@ import { message  } from 'antd';
 
 import { useSelector, useDispatch } from "react-redux";
 import * as Student from "./students.slice";
-import StudentService from "../../services/students.service";
+import StudentService from "./students.service";
 
 const layout = {
   labelCol: { span: 8 },
@@ -67,8 +67,7 @@ export default () => {
   return (
 
     <AdminLayout>
-      <h1>Edit Student Entry: {id}</h1>
-      {/* <p>{loadedData.name}</p> */}
+      <h1>Edit Student Entry: </h1>
       <div style={{ maxWidth: "500px", margin: "0 auto" }}>
         <Form
           {...layout}
