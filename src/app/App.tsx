@@ -6,13 +6,11 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { createBrowserHistory, History } from "history";
 
 import StudentsPage from '../features/students/StudentsPage';
 import LoginPage from '../features/login/LoginPage';
 import StudentsAddForm from "../features/students/StudentAddForm";
 
-const history = createBrowserHistory();
 function App() {
   return (
      <Router>
