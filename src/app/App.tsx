@@ -10,6 +10,7 @@ import {
 import StudentsPage from '../features/students/StudentsPage';
 import LoginPage from '../features/login/LoginPage';
 import StudentsAddForm from "../features/students/StudentsAddForm";
+import StudentsEditForm from "../features/students/StudentsEditForm";
 
 function App() {
   return (
@@ -24,9 +25,12 @@ function App() {
           <StudentsPage />
         </Route>
 
-    
         <Route exact path="/students/add">
           <StudentsAddForm />
+        </Route>
+
+        <Route exact path="/students/edit/:id">
+          <StudentsEditForm />
         </Route>
        
 

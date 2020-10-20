@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { render } from "@testing-library/react";
 import rootReducer from "../app/rootReducer";
 
+// Mock redux before render the component
 export const renderWithRedux = (
   component: any,
   { store = configureStore({ reducer: rootReducer }) } = {}

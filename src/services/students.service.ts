@@ -1,36 +1,29 @@
-// import http from "";
-//import axios from "axios";
 import http from './config';
 import { Student } from './types';
 
+const prefix = "students";
+
 class StudentService {
   getAll() {
-    return http.get<Student[]>(`students`);
+    return http.get<Student[]>(prefix);
   }
 
-  //   get(id) {
-  //     return http.get(`/tutorials/${id}`);
-  //   }
+  get(id: string) {
+    return http.get<Student>(`/${prefix}/${id}`);
+  }
 
   add(data: Student) {
-    return http.post<Student>(`students`, data);
+    return http.post<Student>(prefix, data);
   }
 
-  //   update(id, data) {
-  //     return http.put(`/tutorials/${id}`, data);
-  //   }
+  update(id: string, data: Student) {
+    return http.put<Student>(`/${prefix}/${id}`, data);
+  }
 
-  //   delete(id) {
-  //     return http.delete(`/tutorials/${id}`);
-  //   }
+  delete(id: string) {
+    return http.delete<Student>(`/${prefix}/${id}`);
+  }
 
-  //   deleteAll() {
-  //     return http.delete(`/tutorials`);
-  //   }
-
-  //   findByTitle(title) {
-  //     return http.get(`/tutorials?title=${title}`);
-  //   }
 }
 
 export default new StudentService();
