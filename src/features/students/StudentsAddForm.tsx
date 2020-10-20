@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Input, Button } from "antd";
-import AdminLayout from "../layouts/admin/AdminLayout";
+import AdminLayout from "../layouts/AdminLayout";
 import { v4 as uuidv4 } from 'uuid';
 import { message  } from 'antd';
 

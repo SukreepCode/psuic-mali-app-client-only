@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory, useParams} from "react-router-dom";
 import { Form, Input, Button } from "antd";
-import AdminLayout from "../layouts/admin/AdminLayout";
+import AdminLayout from "../layouts/AdminLayout";
 import { message  } from 'antd';
 
 import { useSelector, useDispatch } from "react-redux";
