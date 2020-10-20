@@ -1,4 +1,4 @@
-import http from '../../services/config';
+import http from '../../../services/config';
 
 const prefix = "students";
 

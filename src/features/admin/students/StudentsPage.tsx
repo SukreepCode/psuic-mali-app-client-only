@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 
-import AdminLayout from "../layouts/AdminLayout";
+import AdminLayout from "../../layouts/AdminLayout";
 
 import { useSelector, useDispatch } from "react-redux";
 import * as Student from "./students.slice";

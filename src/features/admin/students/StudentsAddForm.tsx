@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { useHistory, useParams} from "react-router-dom";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import { Form, Input, Button } from "antd";
-import AdminLayout from "../layouts/AdminLayout";
+import AdminLayout from "../../layouts/AdminLayout";
+import { v4 as uuidv4 } from 'uuid';
 import { message  } from 'antd';
 
 import { useSelector, useDispatch } from "react-redux";
@@ -13,26 +14,14 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-export default () => {
+type AppProps = { visible?: boolean; setVisible?: Function };
 
+export default ({ visible, setVisible }: AppProps) => {
+    
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const dispatch = useDispatch();
+  //const students = useSelector(Student.selector);
   const history = useHistory();
-  const [form] = Form.useForm();
-
-  let { id }:any = useParams();
-
-
-  const getData = async () => {
-      const { data }  = await StudentService.get(id);
-      form.setFieldsValue({
-        name: data.name
-      });
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const validateMessages = {
     required: "${label} is required!",
@@ -43,17 +32,17 @@ export default () => {
     console.log(values);
 
     const entry =  {
-        id,
-        name: values.name
+        id: uuidv4(),
+        name: values.user.name
     }
 
     try{
-        await StudentService.update(id, entry);
-        dispatch(Student.actions.edit({id, data: entry}));
+        await StudentService.add(entry);
+        dispatch(Student.actions.add(entry));
         history.goBack();
     } catch(err) {
         console.error(err);
-        message.error(`Can't edit data: ${err}`);
+        message.error(`Can't add data: ${err}`);
     }
     setConfirmLoading(false);
   };
@@ -62,28 +51,24 @@ export default () => {
     history.goBack();
   };
 
-  
-
   return (
-
     <AdminLayout>
-      <h1>Edit Student Entry: </h1>
+      <h1>Add Student Entry</h1>
       <div style={{ maxWidth: "500px", margin: "0 auto" }}>
         <Form
           {...layout}
-          form={form}
           name="nest-messages"
           onFinish={onFinish}
           validateMessages={validateMessages}
         >
           <Form.Item
-            name="name"
+            name={["user", "name"]}
             label="Name"
-            initialValue=""
             rules={[{ required: true }]}
           >
             <Input />
           </Form.Item>
+
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             
             <Button type="primary" htmlType="submit" loading={confirmLoading}>

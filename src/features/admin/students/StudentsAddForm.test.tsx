@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 
 import StudentsAddForm from "./StudentsAddForm";
-import { renderWithRedux } from "../../utils/test";
+import { renderWithRedux } from "../../../utils/test";
 
 test("renders Students Add Form Page", () => {
   const { getByText } = renderWithRedux(<StudentsAddForm /> );

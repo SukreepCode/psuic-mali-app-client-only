@@ -7,10 +7,10 @@ import {
   Route,
 } from "react-router-dom";
 
-import StudentsPage from '../features/students/StudentsPage';
+import StudentsPage from '../features/admin/students/StudentsPage';
 import LoginPage from '../features/login/LoginPage';
-import StudentsAddForm from "../features/students/StudentsAddForm";
-import StudentsEditForm from "../features/students/StudentsEditForm";
+import StudentsAddForm from "../features/admin/students/StudentsAddForm";
+import StudentsEditForm from "../features/admin/students/StudentsEditForm";
 
 function App() {
   return (
