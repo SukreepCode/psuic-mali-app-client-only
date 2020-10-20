@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Input, Button } from "antd";
 import AdminLayout from "../layouts/admin/AdminLayout";
-import { Student as StudentType } from "../../services/types";
 import { v4 as uuidv4 } from 'uuid';
 import { message  } from 'antd';
 
@@ -36,7 +35,7 @@ export default ({ visible, setVisible }: AppProps) => {
         id: uuidv4(),
         name: values.user.name
     }
-    
+
     try{
         await dispatch(Student.addDatabase(entry));
         Student.actions.add(entry);

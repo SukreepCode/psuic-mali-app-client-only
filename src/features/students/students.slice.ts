@@ -3,7 +3,7 @@ import { RootState } from '../../app/rootReducer';
 import studentService from '../../services/students.service';
 
 import { Student } from '../../services/types';
-import { AppThunk } from '../../app/store';
+import { AppThunk, AppDispatch } from '../../app/store';
 
 type StateType = {
     data: Student[]
@@ -26,14 +26,13 @@ const reducers = {
 
 // Async actions
 
-export const fetch = () => async (dispatch: any) => {
+export const fetch = () => async (dispatch: AppDispatch) => {
     const { data } = await studentService.getAll();
     dispatch(actions.update(data));
 };
 
-export const addDatabase = ( value: Student): AppThunk =>  (dispatch: any) => {
+export const addDatabase = ( value: Student): AppThunk =>  (dispatch: AppDispatch) => {
         return studentService.add(value);
-        //dispatch(actions.add(value));
 };
 
 // Setup Slice
