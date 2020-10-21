@@ -12,6 +12,10 @@ import LoginPage from '../features/login/LoginPage';
 import StudentsAddForm from "../features/admin/students/StudentsAddForm";
 import StudentsEditForm from "../features/admin/students/StudentsEditForm";
 
+import TeachersPage from '../features/admin/teachers/TeachersPage';
+import TeachersAddForm from "../features/admin/teachers/TeachersAddForm";
+import TeachersEditForm from "../features/admin/teachers/TeachersEditForm";
+
 function App() {
   return (
      <Router>
@@ -31,6 +35,18 @@ function App() {
 
         <Route exact path="/students/edit/:id">
           <StudentsEditForm />
+        </Route>
+
+        <Route exact path="/teachers">
+          <TeachersPage />
+        </Route>
+
+        <Route exact path="/teachers/add">
+          <TeachersAddForm />
+        </Route>
+
+        <Route exact path="/teachers/edit/:id">
+          <TeachersEditForm />
         </Route>
        
 
