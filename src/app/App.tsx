@@ -16,6 +16,8 @@ import TeachersPage from '../features/admin/teachers/TeachersPage';
 import TeachersAddForm from "../features/admin/teachers/TeachersAddForm";
 import TeachersEditForm from "../features/admin/teachers/TeachersEditForm";
 
+import UsersPage from '../features/admin/UsersPage';
+
 function App() {
   return (
      <Router>
@@ -47,6 +49,10 @@ function App() {
 
         <Route exact path="/teachers/edit/:id">
           <TeachersEditForm />
+        </Route>
+
+        <Route exact path="/users">
+          <UsersPage />
         </Route>
        
 

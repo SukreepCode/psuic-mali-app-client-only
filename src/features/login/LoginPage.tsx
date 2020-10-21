@@ -19,7 +19,7 @@ const LoginPage = ({ message }: AppProps) => {
 
   function onFinish(values: any) {
     console.log('Success:', values);
-    history.push('/students');
+    history.push('/users');
   };
 
   return (
