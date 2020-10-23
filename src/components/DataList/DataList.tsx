@@ -1,16 +1,12 @@
-import React, { ComponentClass, FunctionComponent, useEffect } from "react";
-import { useHistory, Link, Route, RouteComponentProps } from "react-router-dom";
-
-import AdminLayout from "../../features/layouts/AdminLayout";
+import React, { useEffect } from "react";
 
 import { Form, Table, Button, Row, Space, Popconfirm, message } from "antd";
 import { ColumnsType } from "antd/es/table";
 
 import DataAddForm from "./DataAddForm";
-import DataRoute from "./DataRoute";
 import DataEditForm from "./DataEditForm";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import * as Student from "../../features/admin/students/students.slice";
 
@@ -29,7 +25,7 @@ interface AppProps<ObjectType> {
   columns: AppColumnsType<ObjectType>[];
 }
 
-function DataListPage<ObjectType>({
+function DataList<ObjectType>({
   title,
   onLoad,
   onDelete,
@@ -147,5 +143,4 @@ function DataListPage<ObjectType>({
   // Route
 }
 
-DataListPage.Route = DataRoute;
-export default DataListPage;
+export default DataList;
