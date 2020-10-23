@@ -8,6 +8,7 @@ import LoginPage from "../features/login/LoginPage";
 import TeachersPage from "../features/admin/teachers/TeachersPage";
 import StudentsPage from "../features/admin/students/StudentsPage";
 import UsersPage from "../features/admin/UsersPage";
+import EvaluationOverview from "../features/evaluation/Overview";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route exact path="/teachers" component={TeachersPage} />
         <Route exact path="/students" component={StudentsPage} />
         <Route exact path="/users" component={UsersPage} />
+
+        <Route exact path="/evaluation" component={EvaluationOverview} />
         
       </Switch>
     </Router>

@@ -39,22 +39,22 @@ const AdminLayout = ({ message, children }: AppProps) => {
   };
 
   return (
-
     <div className="background">
-
-      <Layout >
+      <Layout>
         <Header>
-          <div style={{ "display": "flex" }}>
-            {!md &&
-              // <Button className="barsMenu" type="text" onClick={showDrawer}>
-              //   <span className="barsBtn"></span>
-              // </Button>
+          <div style={{ display: "flex" }}>
+            {
+              !md && (
+                // <Button className="barsMenu" type="text" onClick={showDrawer}>
+                //   <span className="barsBtn"></span>
+                // </Button>
 
-              // <Button className="trigger" icon={<MenuUnfoldOutlined />} />
-              // <MenuUnfoldOutlined className="trigger" />
-              <div className="trigger" onClick={showDrawer}>
-                <MenuOutlined   />
-              </div>
+                // <Button className="trigger" icon={<MenuUnfoldOutlined />} />
+                // <MenuUnfoldOutlined className="trigger" />
+                <div className="trigger" onClick={showDrawer}>
+                  <MenuOutlined />
+                </div>
+              )
               // React.createElement(!visible ? MenuUnfoldOutlined : MenuFoldOutlined, {
               //   className: 'trigger',
               //   onClick: showDrawer,
@@ -62,12 +62,11 @@ const AdminLayout = ({ message, children }: AppProps) => {
             }
             <div className="logo" />
 
-            {md &&
-              <LeftMenu />}
+            {md && <LeftMenu />}
             <div className="rightMenu">
-              <RightMenu /></div>
+              <RightMenu />
+            </div>
           </div>
-
 
           {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
             <Menu.Item key="1">nav 1</Menu.Item>
@@ -76,23 +75,17 @@ const AdminLayout = ({ message, children }: AppProps) => {
           </Menu> */}
         </Header>
 
-
         <Drawer
-            title="Basic Drawer"
-            placement="left"
-            closable={false}
-            onClose={onClose}
-            visible={visible}
-          >
-            <LeftMenu />
-          </Drawer>
-        
+          title="Basic Drawer"
+          placement="left"
+          closable={false}
+          onClose={onClose}
+          visible={visible}
+        >
+          <LeftMenu />
+        </Drawer>
 
-        <Content>
-          <div className="container">
-            <div className="site-layout-content">{children}</div>
-          </div>
-        </Content>
+        <Content>{children}</Content>
       </Layout>
     </div>
   );

@@ -14,22 +14,26 @@ const TeachersPage = ({ match }: RouteComponentProps<any>) => {
 
   return (
     <AdminLayout>
-      <DataList<TeacherType>
-        title="Teachers Data"
-        objects={teachers.data}
-        fields={[
-          // {key: "id", title: "ID"},
-          { key: "name", title: "Name" , required: true},
-          { key: "email", title: "E-mail" , required: false},
-        ]}
-        onFetchAll={() => dispatch(Teacher.fetchAll())}
-        onFetch={(id: string) => dispatch(Teacher.fetch(id))}
-        onDelete={(id: string) => dispatch(Teacher.deleteData(id))}
-        onAdd={(teacher: TeacherType) => dispatch(Teacher.addData(teacher))}
-        onEdit={(id: string, teacher: TeacherType) =>
-          dispatch(Teacher.editData(id, teacher))
-        }
-      />
+      <div className="container ">
+        <div className="content-layout ">
+          <DataList<TeacherType>
+            title="Teachers Data"
+            objects={teachers.data}
+            fields={[
+              // {key: "id", title: "ID"},
+              { key: "name", title: "Name", required: true },
+              { key: "email", title: "E-mail", required: false },
+            ]}
+            onFetchAll={() => dispatch(Teacher.fetchAll())}
+            onFetch={(id: string) => dispatch(Teacher.fetch(id))}
+            onDelete={(id: string) => dispatch(Teacher.deleteData(id))}
+            onAdd={(teacher: TeacherType) => dispatch(Teacher.addData(teacher))}
+            onEdit={(id: string, teacher: TeacherType) =>
+              dispatch(Teacher.editData(id, teacher))
+            }
+          />
+        </div>
+      </div>
     </AdminLayout>
   );
 };
