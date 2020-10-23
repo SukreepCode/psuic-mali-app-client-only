@@ -6,10 +6,6 @@ import { ColumnsType } from "antd/es/table";
 import DataAddForm from "./DataAddForm";
 import DataEditForm from "./DataEditForm";
 
-import { useDispatch } from "react-redux";
-
-import * as Student from "../../features/admin/students/students.slice";
-
 interface AppColumnsType<ObjectType> {
   key: keyof ObjectType;
   title: string;
@@ -17,7 +13,8 @@ interface AppColumnsType<ObjectType> {
 
 interface AppProps<ObjectType> {
   title?: string;
-  onLoad: () => void;
+  onFetchAll: () => void;
+  onFetch: (id: any) => any;
   onDelete: (id: any) => void;
   onAdd: (object: ObjectType) => void;
   onEdit: (id: any, object: ObjectType) => void;
@@ -27,7 +24,8 @@ interface AppProps<ObjectType> {
 
 function DataList<ObjectType>({
   title,
-  onLoad,
+  onFetchAll,
+  onFetch,
   onDelete,
   onAdd,
   onEdit,
@@ -37,14 +35,14 @@ function DataList<ObjectType>({
 
   // form for controlling DataEditForm.tsx
   const [form] = Form.useForm();
-  const dispatch = useDispatch();
+
   const [addFormVisible, setAddFormVisible] = React.useState(false);
   const [editFormVisible, setEditFormVisible] = React.useState(false);
   const [editFormId, setEditFormId] = React.useState("");
   const [editFormLoading, setEditFormLoading] = React.useState(false);
 
   useEffect(() => {
-    onLoad();
+    onFetchAll();
   }, []);
 
   const handleAddButton = () => {
@@ -56,7 +54,7 @@ function DataList<ObjectType>({
       setEditFormId(id);
       setEditFormLoading(true);
       setEditFormVisible(true);
-      const response = await dispatch(Student.fetch(id))
+      const response = await onFetch(id);
 
       // form for controlling DataEditForm.tsx
       form.setFieldsValue({
@@ -120,7 +118,7 @@ function DataList<ObjectType>({
       <Table<any> columns={columnsTable} dataSource={objects} />
 
       <DataAddForm
-        title={"Add student entry"}
+        title={"Add new collection"}
         visible={addFormVisible}
         onAdd={onAdd}
         onCancel={() => {
@@ -130,7 +128,7 @@ function DataList<ObjectType>({
 
       <DataEditForm<ObjectType>
         form={form}
-        title={"Edit student entry"}
+        title={"Edit the collection"}
         visible={editFormVisible}
         onEdit={onEdit}
         onCancel={onCancelEditForm}

@@ -25,7 +25,8 @@ const StudentPage = ({ match }: RouteComponentProps<any>) => {
           // {key: "id", title: "ID"},
           { key: "name", title: "Name" },
         ]}
-        onLoad={() => dispatch(Student.fetchAll())}
+        onFetchAll={() => dispatch(Student.fetchAll())}
+        onFetch={(id: string) => dispatch(Student.fetch(id))}
         onDelete={(id: string) => dispatch(Student.deleteData(id))}
         onAdd={(student: StudentType) => dispatch(Student.addData(student))}
         onEdit={(id: string, student: StudentType) =>
