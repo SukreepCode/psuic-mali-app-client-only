@@ -2,32 +2,32 @@ import http from '../../../services/config';
 
 const prefix = "teachers";
 
-export interface Student {
+export interface Teacher {
   id: string;
   name: string;
 }
 
-class StudentService {
+class TeacherService {
   getAll() {
-    return http.get<Student[]>(prefix);
+    return http.get<Teacher[]>(prefix);
   }
 
   get(id: string) {
-    return http.get<Student>(`/${prefix}/${id}`);
+    return http.get<Teacher>(`/${prefix}/${id}`);
   }
 
-  add(data: Student) {
-    return http.post<Student>(prefix, data);
+  add(data: Teacher) {
+    return http.post<Teacher>(prefix, data);
   }
 
-  update(id: string, data: Student) {
-    return http.put<Student>(`/${prefix}/${id}`, data);
+  update(id: string, data: Teacher) {
+    return http.put<Teacher>(`/${prefix}/${id}`, data);
   }
 
   delete(id: string) {
-    return http.delete<Student>(`/${prefix}/${id}`);
+    return http.delete<Teacher>(`/${prefix}/${id}`);
   }
 
 }
 
-export default new StudentService();
+export default new TeacherService();

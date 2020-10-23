@@ -1,79 +1,36 @@
 import React, { useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
-
+import { RouteComponentProps } from "react-router-dom";
 import AdminLayout from "../../layouts/AdminLayout";
+import DataList from "../../../components/DataList/DataList";
 
+// Redux
 import { useSelector, useDispatch } from "react-redux";
-import * as Student from "./teachers.slice";
-import StudentService from "./teachers.service";
+import * as Teacher from "./teachers.slice";
+import { Teacher as TeacherType } from "./teachers.service";
 
-import { Table, Button, Row, Space, Popconfirm, message } from "antd";
-
-const linkPrefix = "/teachers";
-
-
-const StudentPage = () => {
-  const history = useHistory();
+const TeachersPage = ({ match }: RouteComponentProps<any>) => {
   const dispatch = useDispatch();
-  const teachers = useSelector(Student.selector);
-
-  useEffect(() => {
-    dispatch(Student.fetchAll());
-  }, []);
-
-  const handleAddButton = () => {
-    history.push(`${linkPrefix}/add`);
-  }
-
-  const handleDelete = async (id: string) => {
-    try{
-      await StudentService.delete(id);
-      dispatch(Student.actions.delete(id));
-  } catch(err) {
-      console.error(err);
-      message.error(`Can't delete data: ${err}`);
-    }
-  }
-
-  const columns = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text: any, record: any) => (
-        <Space size="middle">
-          <Link to={`${linkPrefix}/edit/${record.id}`}>Edit</Link>
-          <Popconfirm title="Do you want to delete ?" onConfirm={() => handleDelete(record.id)}>
-              <a>Delete</a>
-            </Popconfirm>
-        </Space>
-      ),
-    }
-  ];
+  const teachers = useSelector(Teacher.selector);
 
   return (
     <AdminLayout>
-      <h1>Teachers Data</h1>
-      <Row justify="end">
-        <p>
-          <Button type="primary" onClick={handleAddButton}>
-            Add
-          </Button>
-        </p>
-      </Row>
-      <Table columns={columns} dataSource={teachers.data} />
-      <Button onClick={() => dispatch(Student.fetchAll())}>Reload Data</Button>
+      <DataList<TeacherType>
+        title="Teachers Data"
+        objects={teachers.data}
+        columns={[
+          // {key: "id", title: "ID"},
+          { key: "name", title: "Name" },
+        ]}
+        onFetchAll={() => dispatch(Teacher.fetchAll())}
+        onFetch={(id: string) => dispatch(Teacher.fetch(id))}
+        onDelete={(id: string) => dispatch(Teacher.deleteData(id))}
+        onAdd={(teacher: TeacherType) => dispatch(Teacher.addData(teacher))}
+        onEdit={(id: string, teacher: TeacherType) =>
+          dispatch(Teacher.editData(id, teacher))
+        }
+      />
     </AdminLayout>
   );
 };
 
-export default StudentPage;
+export default TeachersPage;

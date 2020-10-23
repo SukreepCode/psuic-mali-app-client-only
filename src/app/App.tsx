@@ -17,13 +17,10 @@ function App() {
           <LoginPage />
         </Route>
 
-        <Route exact path="/teachers">
-          <TeachersPage />
-        </Route>
-
+        <Route exact path="/teachers" component={TeachersPage} />
         <Route exact path="/students" component={StudentsPage} />
-
         <Route exact path="/users" component={UsersPage} />
+        
       </Switch>
     </Router>
   );

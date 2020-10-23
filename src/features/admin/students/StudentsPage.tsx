@@ -1,16 +1,12 @@
 import React, { useEffect } from "react";
-import {
-  useHistory,
-  Link,
-  Route,
-  RouteComponentProps,
-  Switch,
-} from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import AdminLayout from "../../layouts/AdminLayout";
+import DataList from "../../../components/DataList/DataList";
+
+// Redux
 import { useSelector, useDispatch } from "react-redux";
 import * as Student from "./students.slice";
 import { Student as StudentType } from "./students.service";
-import DataList from "../../../components/DataList/DataList";
 
 const StudentPage = ({ match }: RouteComponentProps<any>) => {
   const dispatch = useDispatch();
