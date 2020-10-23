@@ -1,13 +1,7 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { Form, Input, Button, Modal } from "antd";
-import AdminLayout from "../../features/layouts/AdminLayout";
+import { Form, Input, Modal } from "antd";
 import { v4 as uuidv4 } from 'uuid';
 import { message  } from 'antd';
-
-import { useSelector, useDispatch } from "react-redux";
-import * as Student from "../../features/admin/students/students.slice";
-// import StudentService from "./students.service";
 
 const layout = {
   labelCol: { span: 8 },
@@ -17,15 +11,13 @@ const layout = {
 type AppProps = { 
   visible?: boolean; 
   onCancel: () => void;
+  onAdd: Function;
   title?: string;
 };
 
-export default ({ visible, onCancel, title }: AppProps) => {
+export default ({ visible, onCancel, title, onAdd}: AppProps) => {
     
   const [confirmLoading, setConfirmLoading] = React.useState(false);
-  const dispatch = useDispatch();
-  //const students = useSelector(Student.selector);
-  const history = useHistory();
 
   const validateMessages = {
     required: "${label} is required!",
@@ -41,8 +33,7 @@ export default ({ visible, onCancel, title }: AppProps) => {
     }
 
     try{
-        await dispatch(Student.addData(entry));
-        dispatch(Student.actions.add(entry));
+        await onAdd(entry);
         onCancel();
     } catch(err) {
         console.error(err);
@@ -75,12 +66,10 @@ export default ({ visible, onCancel, title }: AppProps) => {
       }}
     >
 
-      {/* <div style={{ maxWidth: "500px", margin: "0 auto" }}> */}
         <Form
           {...layout}
           form={form}
           name="nest-messages"
-          // onFinish={onFinish}
           validateMessages={validateMessages}
         >
           <Form.Item
@@ -91,18 +80,8 @@ export default ({ visible, onCancel, title }: AppProps) => {
             <Input />
           </Form.Item>
 
-          {/* <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            
-            <Button type="primary" htmlType="submit" loading={confirmLoading}>
-              Submit
-            </Button>
-            <Button style={{marginLeft: "20px"}} onClick={handleCancel}>
-              Cancel
-            </Button>
-          </Form.Item> */}
-         
         </Form>
-      {/* </div> */}
+
       </Modal>
     </>
   );

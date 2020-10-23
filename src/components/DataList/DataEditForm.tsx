@@ -1,60 +1,50 @@
-import React, {useEffect} from "react";
-import { useHistory } from "react-router-dom";
-import { Form, Input, Button, Modal } from "antd";
-import AdminLayout from "../../features/layouts/AdminLayout";
-import { v4 as uuidv4 } from "uuid";
+import React from "react";
+import { Form, Input, Modal, Row } from "antd";
+import { FormInstance } from "antd/lib/form";
 import { message } from "antd";
-
-import { useSelector, useDispatch } from "react-redux";
-import * as Student from "../../features/admin/students/students.slice";
-// import StudentService from "./students.service";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
 
-type AppProps = {
+type AppProps<ObjectType> = {
   visible?: boolean;
   onCancel: () => void;
+  onEdit: Function;
   title?: string;
   currentId: string;
+  isLoading: boolean;
+  form: FormInstance<any>;
 };
 
-export default ({ visible, onCancel, title, currentId }: AppProps) => {
+function DataEditForm<ObjectType>({
+  visible,
+  onCancel,
+  onEdit,
+  title,
+  currentId,
+  isLoading,
+  form,
+}: AppProps<ObjectType>) {
   const [confirmLoading, setConfirmLoading] = React.useState(false);
-  const dispatch = useDispatch();
-  //const students = useSelector(Student.selector);
-  const history = useHistory();
 
   const validateMessages = {
     required: "${label} is required!",
   };
-
-  const getData = async () => {
-    const response = await dispatch(Student.fetch(currentId));
-    form.setFieldsValue({
-      name: response.data.name,
-    });
-    console.log(response.data);
-  };
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
 
   const onFinish = async (values: any) => {
     setConfirmLoading(true);
     console.log(values);
 
     const entry = {
-      id: uuidv4(),
-      name: values.user.name,
+      id: currentId,
+      name: values.name,
     };
 
     try {
-      await dispatch(Student.editData(currentId, entry));
-        dispatch(Student.actions.edit({id: currentId, data: entry}));
+      await onEdit(currentId, entry);
       onCancel();
     } catch (err) {
       console.error(err);
@@ -63,14 +53,12 @@ export default ({ visible, onCancel, title, currentId }: AppProps) => {
     setConfirmLoading(false);
   };
 
-  const [form] = Form.useForm();
-
   return (
     <>
       <Modal
         visible={visible}
         title={title}
-        okText="Create"
+        okText="Save"
         cancelText="Cancel"
         onCancel={onCancel}
         confirmLoading={confirmLoading}
@@ -86,24 +74,28 @@ export default ({ visible, onCancel, title, currentId }: AppProps) => {
             });
         }}
       >
-        {/* <div style={{ maxWidth: "500px", margin: "0 auto" }}> */}
         <Form
           {...layout}
           form={form}
           name="nest-messages"
-          // onFinish={onFinish}
           validateMessages={validateMessages}
         >
-          <Form.Item
-            name="name"
-            label="Name"
-            rules={[{ required: true }]}
-          >
-            <Input />
-          </Form.Item>
+          {isLoading && (
+            <Row justify="center" style={{ marginBottom: "10px" }}>
+              <LoadingOutlined style={{ fontSize: "32px" }} />
+            </Row>
+          )}
+          {!isLoading && (
+            <>
+              <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </>
+          )}
         </Form>
-        {/* </div> */}
       </Modal>
     </>
   );
-};
+}
+
+export default DataEditForm;

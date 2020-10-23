@@ -9,7 +9,6 @@ import { useSelector, useDispatch } from "react-redux";
 import * as Student from "./students.slice";
 import { Student as StudentType } from "./students.service";
 
-
 type AppProps = { message?: string };
 
 const StudentsListPage = ({ message }: AppProps) => {
@@ -20,13 +19,19 @@ const StudentsListPage = ({ message }: AppProps) => {
     return (
         <AdminLayout>
 
-            <DataList 
-                name="new-students"
+            <DataList<StudentType>
                 title="Students Data"
-                data={students.data}
+                objects={students.data}
+                columns={
+                    [
+                        // {key: "id", title: "ID"},
+                        {key: "name", title: "Name"},
+                    ]
+                }
                 onLoad={() => dispatch(Student.fetchAll())}
                 onDelete={(id: string) => dispatch(Student.deleteData(id))}
                 onAdd={(student: StudentType) => dispatch(Student.addData(student))}
+                onEdit={(id: string, student: StudentType) => dispatch(Student.editData(id, student))}
             />
 
         </AdminLayout>

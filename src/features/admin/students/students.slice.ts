@@ -43,8 +43,14 @@ export const fetchAll = () => async (dispatch: AppDispatch) => {
     dispatch(actions.update(data));
 };
 
-export const addData = ( value: Student): any =>  (dispatch: AppDispatch) => {
-    return studentService.add(value);
+export const addData = ( value: Student): any => async (dispatch: AppDispatch) => {
+    try{
+        await studentService.add(value);
+        dispatch(actions.add(value));
+    }
+    catch (err){
+        throw err;
+    }
 };
 
 export const deleteData = ( id: string): any =>  async (dispatch: AppDispatch) => {
@@ -61,8 +67,16 @@ export const fetch = ( id: string): any =>  (dispatch: AppDispatch) => {
     return studentService.get(id);
 };
 
-export const editData = ( id: string, data: Student): any =>  (dispatch: AppDispatch) => {
-    return studentService.update(id, data);
+export const editData = ( id: string, data: Student): any =>  async (dispatch: AppDispatch) => {
+
+    try{
+        await studentService.update(id, data);
+        dispatch(actions.edit({ id , data }));
+    }
+    catch (err){
+        throw err;
+    }
+
 };
 
 
