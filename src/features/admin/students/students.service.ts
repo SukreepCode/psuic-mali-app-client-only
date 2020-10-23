@@ -2,9 +2,9 @@ import http from '../../../services/config';
 
 const prefix = "students";
 
-export class Student {
-  id: string = "";
-  name: string = "";
+export interface Student {
+  id: string;
+  name: string;
 }
 
 class StudentService {

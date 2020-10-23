@@ -6,12 +6,13 @@ import { ColumnsType } from "antd/es/table";
 import DataAddForm from "./DataAddForm";
 import DataEditForm from "./DataEditForm";
 
-interface AppColumnsType<ObjectType> {
+export interface FieldsType<ObjectType> {
   key: keyof ObjectType;
   title: string;
+  required: boolean;
 }
 
-interface AppProps<ObjectType> {
+interface Props<ObjectType> {
   title?: string;
   onFetchAll: () => void;
   onFetch: (id: any) => any;
@@ -19,7 +20,7 @@ interface AppProps<ObjectType> {
   onAdd: (object: ObjectType) => void;
   onEdit: (id: any, object: ObjectType) => void;
   objects: ObjectType[];
-  columns: AppColumnsType<ObjectType>[];
+  fields: FieldsType<ObjectType>[];
 }
 
 function DataList<ObjectType>({
@@ -30,8 +31,8 @@ function DataList<ObjectType>({
   onAdd,
   onEdit,
   objects,
-  columns,
-}: AppProps<ObjectType>) {
+  fields,
+}: Props<ObjectType>) {
 
   // form for controlling DataEditForm.tsx
   const [form] = Form.useForm();
@@ -56,10 +57,18 @@ function DataList<ObjectType>({
       setEditFormVisible(true);
       const response = await onFetch(id);
 
-      // form for controlling DataEditForm.tsx
-      form.setFieldsValue({
-        name: response.data.name,
+      interface setFieldType {
+        [key: string]: any;
+      }
+  
+      let obj: setFieldType = {};
+      // add all keys to add 
+      fields.map( (field: any) => {
+        obj[field.key] = response.data[field.key];
       });
+
+      // form for controlling DataEditForm.tsx
+      form.setFieldsValue(obj);
 
       setEditFormLoading(false);
     } catch (err) {
@@ -75,9 +84,7 @@ function DataList<ObjectType>({
 
     // form for controlling DataEditForm.tsx
     // Clear all data
-    form.setFieldsValue({
-      name: "",
-    });
+    form.resetFields();
   }
 
   const columnAction = {
@@ -96,11 +103,15 @@ function DataList<ObjectType>({
     ),
   };
 
-  const columnsTable: ColumnsType<ObjectType> = columns.map((column: any) => {
+  const columnsTable: ColumnsType<ObjectType> = fields.map((field: any) => {
     // Add the `key` to = `dataIndex` of column (Ant Design)
     // https://ant.design/components/table/#Column
-    column.dataIndex = column.key;
-    return column;
+    const tmp = {
+      key: field.key,
+      dataIndex: field.key,
+      title: field.title
+    }
+    return tmp;
   });
 
   columnsTable.push(columnAction);
@@ -117,13 +128,14 @@ function DataList<ObjectType>({
       </Row>
       <Table<any> columns={columnsTable} dataSource={objects} />
 
-      <DataAddForm
+      <DataAddForm<ObjectType>
         title={"Add new collection"}
         visible={addFormVisible}
         onAdd={onAdd}
         onCancel={() => {
           setAddFormVisible(false);
         }}
+        fields={fields}
       />
 
       <DataEditForm<ObjectType>
@@ -134,6 +146,7 @@ function DataList<ObjectType>({
         onCancel={onCancelEditForm}
         isLoading={editFormLoading}
         currentId={editFormId}
+        fields={fields}
       />
     </>
   );

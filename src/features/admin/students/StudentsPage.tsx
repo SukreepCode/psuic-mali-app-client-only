@@ -17,9 +17,9 @@ const StudentPage = ({ match }: RouteComponentProps<any>) => {
       <DataList<StudentType>
         title="Students Data"
         objects={students.data}
-        columns={[
+        fields={[
           // {key: "id", title: "ID"},
-          { key: "name", title: "Name" },
+          { key: "name", title: "Name" , required: true},
         ]}
         onFetchAll={() => dispatch(Student.fetchAll())}
         onFetch={(id: string) => dispatch(Student.fetch(id))}

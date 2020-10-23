@@ -17,9 +17,10 @@ const TeachersPage = ({ match }: RouteComponentProps<any>) => {
       <DataList<TeacherType>
         title="Teachers Data"
         objects={teachers.data}
-        columns={[
+        fields={[
           // {key: "id", title: "ID"},
-          { key: "name", title: "Name" },
+          { key: "name", title: "Name" , required: true},
+          { key: "email", title: "E-mail" , required: false},
         ]}
         onFetchAll={() => dispatch(Teacher.fetchAll())}
         onFetch={(id: string) => dispatch(Teacher.fetch(id))}

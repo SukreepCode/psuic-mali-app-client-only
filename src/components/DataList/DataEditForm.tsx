@@ -3,6 +3,8 @@ import { Form, Input, Modal, Row } from "antd";
 import { FormInstance } from "antd/lib/form";
 import { message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import { FieldsType } from "./DataList";
+import { EditableObject } from "./utils";
 
 const layout = {
   labelCol: { span: 8 },
@@ -17,6 +19,7 @@ type AppProps<ObjectType> = {
   currentId: string;
   isLoading: boolean;
   form: FormInstance<any>;
+  fields: FieldsType<ObjectType>[];
 };
 
 function DataEditForm<ObjectType>({
@@ -27,6 +30,7 @@ function DataEditForm<ObjectType>({
   currentId,
   isLoading,
   form,
+  fields
 }: AppProps<ObjectType>) {
   const [confirmLoading, setConfirmLoading] = React.useState(false);
 
@@ -36,21 +40,22 @@ function DataEditForm<ObjectType>({
 
   const onFinish = async (values: any) => {
     setConfirmLoading(true);
-    console.log(values);
 
-    const entry = {
-      id: currentId,
-      name: values.name,
-    };
+    let obj: EditableObject = { id: currentId };
+    // add all keys to add 
+    fields.map( (field: any) => {
+      obj[field.key] = values[field.key];
+    });
 
     try {
-      await onEdit(currentId, entry);
+      await onEdit(currentId, obj);
       onCancel();
     } catch (err) {
       console.error(err);
       message.error(`Can't add data: ${err}`);
     }
     setConfirmLoading(false);
+    form.resetFields();
   };
 
   return (
@@ -66,7 +71,7 @@ function DataEditForm<ObjectType>({
           form
             .validateFields()
             .then((values) => {
-              form.resetFields();
+              // form.resetFields();
               onFinish(values);
             })
             .catch((info) => {
@@ -85,13 +90,16 @@ function DataEditForm<ObjectType>({
               <LoadingOutlined style={{ fontSize: "32px" }} />
             </Row>
           )}
-          {!isLoading && (
-            <>
-              <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+          {!isLoading && fields.map((field: any) => (
+              <Form.Item
+                name={field.key}
+                label={field.title}
+                rules={[{ required: field.required }]}
+              >
                 <Input />
               </Form.Item>
-            </>
-          )}
+            ))
+          }
         </Form>
       </Modal>
     </>

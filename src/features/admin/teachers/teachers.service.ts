@@ -5,6 +5,7 @@ const prefix = "teachers";
 export interface Teacher {
   id: string;
   name: string;
+  email: string;
 }
 
 class TeacherService {
