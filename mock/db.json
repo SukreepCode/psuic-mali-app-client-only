@@ -1,34 +1,19 @@
 {
   "students": [
     {
-      "id": "c2793a22-8d1c-4ac3-ba8c-bf24e554fb98",
-      "name": "ef weffffff"
-    },
-    {
-      "id": "b0dd9e16-b4c9-468f-97b7-115438369703",
-      "name": "aaa"
-    },
-    {
-      "id": "6d214fc4-f351-42ea-bf0b-a454aaf50cd4",
-      "name": "wefwef "
-    },
-    {
-      "id": "f25ebdea-e826-402b-8ae5-30a56d5c503b",
-      "name": "Sompong"
-    },
-    {
-      "id": "f854ad7f-4c9d-48db-befb-6f740c2b3844",
-      "name": "Sompong wefwef"
-    },
-    {
       "id": "30da9599-cafa-44a7-9d42-21e7c865574c",
-      "name": "Sompong mild efefw wefwef"
+      "name": "Sompong mild efefw wef"
+    },
+    {
+      "id": "fe04fb4c-0285-47b5-8dee-7ea3e695f1e0",
+      "name": "kkk w--- wef ทดสอบ"
     }
   ],
   "teachers": [
     {
       "id": "c2793a22-8d1c-4ac3-ba8c-bf24e554fb97",
-      "name": "Thada Wangthammang"
+      "name": "Thada Wangthammang",
+      "email": "thada.w@psu.ac.th"
     }
   ]
 }
