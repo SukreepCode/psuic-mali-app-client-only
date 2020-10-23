@@ -1,12 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Input, Button } from "antd";
-import AdminLayout from "../../layouts/AdminLayout";
+import { Form, Input, Button, Modal } from "antd";
+import AdminLayout from "../../features/layouts/AdminLayout";
 import { v4 as uuidv4 } from 'uuid';
 import { message  } from 'antd';
 
 import { useSelector, useDispatch } from "react-redux";
-import * as Student from "./students.slice";
+import * as Student from "../../features/admin/students/students.slice";
 // import StudentService from "./students.service";
 
 const layout = {
@@ -14,9 +14,13 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-type AppProps = { visible?: boolean; setVisible?: Function };
+type AppProps = { 
+  visible?: boolean; 
+  onCancel: () => void;
+  title?: string;
+};
 
-export default ({ visible, setVisible }: AppProps) => {
+export default ({ visible, onCancel, title }: AppProps) => {
     
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const dispatch = useDispatch();
@@ -39,7 +43,7 @@ export default ({ visible, setVisible }: AppProps) => {
     try{
         await dispatch(Student.addData(entry));
         dispatch(Student.actions.add(entry));
-        history.goBack();
+        onCancel();
     } catch(err) {
         console.error(err);
         message.error(`Can't add data: ${err}`);
@@ -47,18 +51,36 @@ export default ({ visible, setVisible }: AppProps) => {
     setConfirmLoading(false);
   };
 
-  const handleCancel = ()=> {
-    history.goBack();
-  };
+  const [form] = Form.useForm();
 
   return (
-    <AdminLayout>
-      <h1>Add Student Entry</h1>
-      <div style={{ maxWidth: "500px", margin: "0 auto" }}>
+    <>
+    <Modal
+      visible={visible}
+      title={title}
+      okText="Create"
+      cancelText="Cancel"
+      onCancel={onCancel}
+      confirmLoading={confirmLoading}
+      onOk={() => {
+        form
+          .validateFields()
+          .then(values => {
+            form.resetFields();
+            onFinish(values);
+          })
+          .catch(info => {
+            console.log('Validate Failed:', info);
+          });
+      }}
+    >
+
+      {/* <div style={{ maxWidth: "500px", margin: "0 auto" }}> */}
         <Form
           {...layout}
+          form={form}
           name="nest-messages"
-          onFinish={onFinish}
+          // onFinish={onFinish}
           validateMessages={validateMessages}
         >
           <Form.Item
@@ -69,7 +91,7 @@ export default ({ visible, setVisible }: AppProps) => {
             <Input />
           </Form.Item>
 
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+          {/* <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             
             <Button type="primary" htmlType="submit" loading={confirmLoading}>
               Submit
@@ -77,10 +99,11 @@ export default ({ visible, setVisible }: AppProps) => {
             <Button style={{marginLeft: "20px"}} onClick={handleCancel}>
               Cancel
             </Button>
-          </Form.Item>
+          </Form.Item> */}
          
         </Form>
-      </div>
-    </AdminLayout>
+      {/* </div> */}
+      </Modal>
+    </>
   );
 };

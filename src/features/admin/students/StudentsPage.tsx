@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link , Route, RouteComponentProps, Switch} from "react-router-dom";
 
 import AdminLayout from "../../layouts/AdminLayout";
 
 import { useSelector, useDispatch } from "react-redux";
 import * as Student from "./students.slice";
-import StudentService from "./students.service";
+// import StudentService from "./students.service";
+import StudentsAddForm from "./StudentsAddForm";
 
 import { Table, Button, Row, Space, Popconfirm, message } from "antd";
 
 const linkPrefix = "/students";
 
-
-const StudentPage = () => {
+const StudentPage = ({ match }: RouteComponentProps<any>) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const students = useSelector(Student.selector);
@@ -27,8 +27,7 @@ const StudentPage = () => {
 
   const handleDelete = async (id: string) => {
     try{
-      await StudentService.delete(id);
-      dispatch(Student.actions.delete(id));
+      await dispatch(Student.deleteData(id));
   } catch(err) {
       console.error(err);
       message.error(`Can't delete data: ${err}`);
@@ -72,6 +71,7 @@ const StudentPage = () => {
       </Row>
       <Table columns={columns} dataSource={students.data} />
       <Button onClick={() => dispatch(Student.fetchAll())}>Reload Data</Button>
+
     </AdminLayout>
   );
 };

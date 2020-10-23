@@ -43,16 +43,26 @@ export const fetchAll = () => async (dispatch: AppDispatch) => {
     dispatch(actions.update(data));
 };
 
-export const addDatabase = ( value: Student): AppThunk =>  (dispatch: AppDispatch) => {
+export const addData = ( value: Student): any =>  (dispatch: AppDispatch) => {
     return studentService.add(value);
 };
 
-export const deleteDatabase = ( id: string): AppThunk =>  (dispatch: AppDispatch) => {
-    return studentService.delete(id);
+export const deleteData = ( id: string): any =>  async (dispatch: AppDispatch) => {
+    try{
+        await studentService.delete(id);
+        dispatch(actions.delete(id));
+    }
+    catch (err){
+        throw err;
+    }
 };
 
-export const fetch = ( id: string): AppThunk =>  (dispatch: AppDispatch) => {
+export const fetch = ( id: string): any =>  (dispatch: AppDispatch) => {
     return studentService.get(id);
+};
+
+export const editData = ( id: string, data: Student): any =>  (dispatch: AppDispatch) => {
+    return studentService.update(id, data);
 };
 
 

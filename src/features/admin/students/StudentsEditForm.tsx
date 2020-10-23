@@ -6,7 +6,6 @@ import { message  } from 'antd';
 
 import { useSelector, useDispatch } from "react-redux";
 import * as Student from "./students.slice";
-import StudentService from "./students.service";
 
 const layout = {
   labelCol: { span: 8 },
@@ -24,9 +23,9 @@ export default () => {
 
 
   const getData = async () => {
-      const { data }  = await StudentService.get(id);
+      const response  = await dispatch(Student.fetch(id));
       form.setFieldsValue({
-        name: data.name
+        name: response.data.name
       });
   }
 
@@ -48,7 +47,7 @@ export default () => {
     }
 
     try{
-        await StudentService.update(id, entry);
+        await dispatch(Student.editData(id, entry));
         dispatch(Student.actions.edit({id, data: entry}));
         history.goBack();
     } catch(err) {
