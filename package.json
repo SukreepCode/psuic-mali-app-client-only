@@ -35,6 +35,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "dev": "run-p start mock",
+    "type-check": "tsc -p tsconfig.json -w",
     "mock": "json-server --watch mock/db.json --port 3005 --delay 500"
   },
   "eslintConfig": {
