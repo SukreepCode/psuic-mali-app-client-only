@@ -2,45 +2,38 @@ import React, { useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 
 import AdminLayout from "../layouts/AdminLayout";
-
+import { useSelector, useDispatch } from "react-redux";
+import * as Criteria from "../admin/criteria/criteria.slice";
 import { Select, List, Row, Col, Grid } from "antd";
-
-const data = [
-  {
-    title: "Ant Design Title 1",
-  },
-  {
-    title: "Ant Design Title 2",
-  },
-  {
-    title: "Ant Design Title 3",
-  },
-  {
-    title: "Ant Design Title 4",
-  },
-];
 
 const Overview = () => {
   const { useBreakpoint } = Grid;
   
   const { md } = useBreakpoint();
+  const dm1Criteria = useSelector(Criteria.dm1selector);
+  const dm2Criteria = useSelector(Criteria.dm2selector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(Criteria.fetchAll());
+  }, []);
+
   return (
     <AdminLayout>
       <div className="container">
-            <SemesterSelector />
+        {/* <SemesterSelector /> */}
         <Row>
           <Col span={md ? 12 : 24}>
             <div className="content-layout ">
               <h1>Project in DM 1</h1>
               <List
                 itemLayout="horizontal"
-                dataSource={data}
+                dataSource={dm1Criteria}
                 renderItem={(item) => (
-                  <List.Item>
-                    <List.Item.Meta
-                      title={<a href="https://ant.design">{item.title}</a>}
-                      description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                    />
+                  <List.Item actions={[<a href="#">{item.ratio} %</a>]}>
+                   <List.Item.Meta
+                      title={(<a href="/evaluation/student-list" style={{ padding: "16px"}}>{item.title}</a>)}
+                     />
                   </List.Item>
                 )}
               />
@@ -51,14 +44,15 @@ const Overview = () => {
               <h1>Project in DM 2</h1>
               <List
                 itemLayout="horizontal"
-                dataSource={data}
+                dataSource={dm2Criteria}
                 renderItem={(item) => (
-                  <List.Item>
+                    
+                  <List.Item actions={[<a href="#">{item.ratio} %</a>]}>
                     <List.Item.Meta
-                      title={<a href="https://ant.design">{item.title}</a>}
-                      description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                    />
+                      title={(<a href="/evaluation/student-list" style={{ padding: "16px"}}>{item.title}</a>)}
+                     />
                   </List.Item>
+           
                 )}
               />
             </div>

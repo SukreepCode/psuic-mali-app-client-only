@@ -19,6 +19,11 @@ const StudentPage = () => {
           <Link to="/students">
             <Button>Students</Button>
           </Link>
+          <br />
+          <br />
+          <Link to="/criteria">
+            <Button>Criteria</Button>
+          </Link>
         </div>
       </div>
     </AdminLayout>
