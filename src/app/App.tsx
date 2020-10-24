@@ -20,7 +20,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
-          <LoginPage />
+          <LoginPage successRoute="/evaluation" />
         </Route>
 
         <Route exact path="/teachers" component={TeachersPage} />

@@ -3,7 +3,7 @@ import { Layout, Button, Row, Col, Form, Input, Checkbox } from "antd";
 import { useHistory } from "react-router-dom";
 import "./loginPage.less";
 
-type AppProps = { message?: string };
+type AppProps = { successRoute: string };
 
 const layout = {
   labelCol: { span: 8 },
@@ -13,13 +13,13 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const LoginPage = ({ message }: AppProps) => {
+const LoginPage = ({ successRoute }: AppProps) => {
   const { Header, Footer, Content } = Layout;
   const history = useHistory();
 
   function onFinish(values: any) {
     console.log('Success:', values);
-    history.push('/users');
+    history.push(successRoute);
   };
 
   return (
