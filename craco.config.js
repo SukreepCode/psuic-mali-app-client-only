@@ -1,17 +1,18 @@
 const CracoLessPlugin = require("craco-less");
+const path = require('path');
 
 module.exports = {
-  // webpack: {
-  //   configure: (webpackConfig, { env, paths }) => {
-  //     const EXCLUDED_PLUGINS = ["ForkTsCheckerWebpackPlugin"];
+ 
 
-  //     webpackConfig.plugins = webpackConfig.plugins.filter(
-  //       (plugin) => !EXCLUDED_PLUGINS.includes(plugin.constructor.name)
-  //     );
-
-  //     return webpackConfig;
-  //   },
-  // },
+  webpack: {
+    alias: {
+      // Prevent the error of `multiple instances of React `, in case of using `npm link`
+      // Hooks + multiple instances of React 
+      // https://github.com/facebook/react/issues/13991
+      // https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react
+      react: path.resolve('./node_modules/react')
+    }
+  },
   typescript: {
     enableTypeChecking: false /* (default value)  */,
   },
