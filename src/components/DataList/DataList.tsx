@@ -9,8 +9,12 @@ import DataEditForm from "./DataEditForm";
 export interface FieldsType<ObjectType> {
   key: keyof ObjectType;
   title: string;
-  required: boolean;
+  required?: boolean;
+  type?: "string" | "number"
 }
+
+// required = default* is not required
+// type = default* is string
 
 interface Props<ObjectType> {
   title?: string;

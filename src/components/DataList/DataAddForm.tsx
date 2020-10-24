@@ -1,9 +1,9 @@
 import React from "react";
-import { Form, Input, Modal } from "antd";
+import { Form, Input, Modal, InputNumber } from "antd";
 import { v4 as uuidv4 } from "uuid";
 import { message } from "antd";
 import { FieldsType } from "./DataList";
-import { EditableObject } from "./utils";
+import { EditableObject, mapFormValuesToFields } from "./utils";
 
 const layout = {
   labelCol: { span: 8 },
@@ -27,31 +27,27 @@ function DataAddForm<ObjectType>({
 }: AppProps<ObjectType>) {
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const [form] = Form.useForm();
-  
+
   const validateMessages = {
     required: "${label} is required!",
   };
 
+
   const onFinish = async (values: any) => {
     setConfirmLoading(true);
 
-    let obj: EditableObject = { id: uuidv4() };
-    // add all keys to add 
-    fields.map( (field: any) => {
-      obj[field.key] = values[field.key];
-    });
- 
     try {
+      let initObj: EditableObject = { id: uuidv4() };
+      const obj = mapFormValuesToFields<ObjectType>(initObj, values, fields);
       await onAdd(obj);
-      onCancel();
     } catch (err) {
       console.error(err);
       message.error(`Can't add data: ${err}`);
     }
+    onCancel();
     setConfirmLoading(false);
     form.resetFields();
   };
-
 
   return (
     <>
@@ -85,7 +81,10 @@ function DataAddForm<ObjectType>({
               label={field.title}
               rules={[{ required: field.required }]}
             >
-              <Input />
+              {field.hasOwnProperty('type') && field.type == "number" ?
+                <InputNumber />: <Input />
+              }
+              
             </Form.Item>
           ))}
         </Form>

@@ -1,10 +1,10 @@
 import React from "react";
-import { Form, Input, Modal, Row } from "antd";
+import { Form, Input, Modal, Row, InputNumber } from "antd";
 import { FormInstance } from "antd/lib/form";
 import { message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { FieldsType } from "./DataList";
-import { EditableObject } from "./utils";
+import { EditableObject, mapFormValuesToFields } from "./utils";
 
 const layout = {
   labelCol: { span: 8 },
@@ -30,7 +30,7 @@ function DataEditForm<ObjectType>({
   currentId,
   isLoading,
   form,
-  fields
+  fields,
 }: AppProps<ObjectType>) {
   const [confirmLoading, setConfirmLoading] = React.useState(false);
 
@@ -41,19 +41,15 @@ function DataEditForm<ObjectType>({
   const onFinish = async (values: any) => {
     setConfirmLoading(true);
 
-    let obj: EditableObject = { id: currentId };
-    // add all keys to add 
-    fields.map( (field: any) => {
-      obj[field.key] = values[field.key];
-    });
-
     try {
+      let initObj: EditableObject = { id: currentId };
+      const obj = mapFormValuesToFields<ObjectType>(initObj, values, fields);
       await onEdit(currentId, obj);
-      onCancel();
     } catch (err) {
       console.error(err);
-      message.error(`Can't add data: ${err}`);
+      message.error(`Can't save data: ${err}`);
     }
+    onCancel();
     setConfirmLoading(false);
     form.resetFields();
   };
@@ -90,16 +86,20 @@ function DataEditForm<ObjectType>({
               <LoadingOutlined style={{ fontSize: "32px" }} />
             </Row>
           )}
-          {!isLoading && fields.map((field: any) => (
+          {!isLoading &&
+            fields.map((field: any) => (
               <Form.Item
                 name={field.key}
                 label={field.title}
                 rules={[{ required: field.required }]}
               >
-                <Input />
+                {field.hasOwnProperty("type") && field.type == "number" ? (
+                  <InputNumber />
+                ) : (
+                  <Input />
+                )}
               </Form.Item>
-            ))
-          }
+            ))}
         </Form>
       </Modal>
     </>
