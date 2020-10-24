@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import AdminLayout from "../../layouts/AdminLayout";
-import DataList from "../../../components/DataList/DataList";
+import DataTable from "../../../components/DataTable/DataTable";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -20,7 +20,7 @@ const CriteriaPage = ({ match }: RouteComponentProps<any>) => {
         <div className="content-layout ">
           <h1>Criteria Data</h1>
           <h1>DM 1</h1>
-          <DataList<CriteriaType>
+          <DataTable<CriteriaType>
             objects={dm1Criteria}
             fields={[
               // {key: "id", title: "ID"},
@@ -37,7 +37,7 @@ const CriteriaPage = ({ match }: RouteComponentProps<any>) => {
             }
           />
            <h1>DM 2</h1>
-          <DataList<CriteriaType>
+          <DataTable<CriteriaType>
             objects={dm2Criteria}
             fields={[
               // {key: "id", title: "ID"},

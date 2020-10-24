@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../layouts/AdminLayout";
-import DataList from "../../components/DataList/DataList";
+import DataList from "../../components/DataTable/DataTable";
 
 import { Form, Input, Button, Checkbox, Radio, Divider } from "antd";
 import { useHistory, useParams } from "react-router-dom";

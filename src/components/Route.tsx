@@ -1,6 +1,6 @@
 import React, { ComponentClass, FunctionComponent } from "react";
 import { useHistory, Link, Route, RouteComponentProps } from "react-router-dom";
-import DataAddForm from "./DataList/DataAddForm";
+import DataAddForm from "./DataTable/DataAddForm";
 
 interface RouteProps {
   name: string;

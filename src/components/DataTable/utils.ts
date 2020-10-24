@@ -1,4 +1,4 @@
-import { FieldsType } from "./DataList";
+import { FieldsType } from "./DataTable";
 
 export interface EditableObject {
     [key: string]: any;

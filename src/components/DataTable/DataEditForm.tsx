@@ -3,7 +3,7 @@ import { Form, Input, Modal, Row, InputNumber } from "antd";
 import { FormInstance } from "antd/lib/form";
 import { message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { FieldsType } from "./DataList";
+import { FieldsType } from "./DataTable";
 import { EditableObject, mapFormValuesToFields } from "./utils";
 
 const layout = {

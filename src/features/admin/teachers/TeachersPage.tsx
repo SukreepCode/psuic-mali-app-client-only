@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import AdminLayout from "../../layouts/AdminLayout";
-import DataList from "../../../components/DataList/DataList";
+import DataTable from "../../../components/DataTable/DataTable";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -16,7 +16,7 @@ const TeachersPage = ({ match }: RouteComponentProps<any>) => {
     <AdminLayout>
       <div className="container ">
         <div className="content-layout ">
-          <DataList<TeacherType>
+          <DataTable<TeacherType>
             title="Teachers Data"
             objects={teachers.data}
             fields={[

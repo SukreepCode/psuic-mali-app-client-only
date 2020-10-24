@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Input, Modal, InputNumber } from "antd";
 import { v4 as uuidv4 } from "uuid";
 import { message } from "antd";
-import { FieldsType } from "./DataList";
+import { FieldsType } from "./DataTable";
 import { EditableObject, mapFormValuesToFields } from "./utils";
 
 const layout = {

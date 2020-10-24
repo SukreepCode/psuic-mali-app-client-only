@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import AdminLayout from "../layouts/AdminLayout";
-import DataList from "../../components/DataList/DataList";
+import DataList from "../../components/DataTable/DataTable";
 import { Space, Table, Row, Col, Grid } from "antd";
 
 // Redux
