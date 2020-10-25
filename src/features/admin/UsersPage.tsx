@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
+// import { DataTable } from "pamai";
 
 import AdminLayout from "../layouts/AdminLayout";
 
@@ -24,6 +25,9 @@ const StudentPage = () => {
           <Link to="/criteria">
             <Button>Criteria</Button>
           </Link>
+
+          {/* <DataTable /> */}
+
         </div>
       </div>
     </AdminLayout>

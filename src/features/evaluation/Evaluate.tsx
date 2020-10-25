@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import AdminLayout from "../layouts/AdminLayout";
+import Layout from "./Layout";
 import DataList from "../../components/DataTable/DataTable";
 
-import { Form, Input, Button, Checkbox, Radio, Divider } from "antd";
+import { Form, Input, Button, Tag, Radio, Divider } from "antd";
 import { useHistory, useParams } from "react-router-dom";
 
 // Redux
@@ -42,14 +42,13 @@ const Evaluate = ({ message }: AppProps) => {
   }, []);
 
   return (
-    <AdminLayout>
-      <div className="container ">
-        <div className="content-layout">
+    <Layout title="Evaluation Form">
+        <div className="card-simple">
           <div style={{ maxWidth: "500px", margin: "0 auto" }}>
-            <h1>Project in DM 1 - Progress 1</h1>
-            <h1>Evaluate</h1>
+            <h2>Project in DM 1 - Progress 1</h2>
             <p>You're evaluating {student.name}.</p>
-            <div style={{ marginTop: "30px " }}>
+
+            <div style={{ marginTop: "3rem" }}>
               <Form
                 {...layout}
                 name="basic"
@@ -67,8 +66,8 @@ const Evaluate = ({ message }: AppProps) => {
                   <Input />
                 </Form.Item> */}
 
-                
-                <Divider orientation="left">Criteria</Divider>
+                <h3>Criteria</h3>
+                <Divider></Divider>
 
                 <Form.Item
                 label="Criteria 1"
@@ -96,7 +95,8 @@ const Evaluate = ({ message }: AppProps) => {
                   </Radio.Group>
                 </Form.Item>
 
-                <Divider orientation="left">Comment</Divider>
+                <h3>Comment</h3>
+                <Divider ></Divider>
 
                 <Form.Item label="Comment" name="comment">
                   <TextArea autoSize={{ minRows: 3 }} />
@@ -119,8 +119,7 @@ const Evaluate = ({ message }: AppProps) => {
             </div>
           </div>
         </div>
-      </div>
-    </AdminLayout>
+    </Layout>
   );
 };
 

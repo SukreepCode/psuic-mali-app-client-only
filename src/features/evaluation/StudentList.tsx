@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import AdminLayout from "../layouts/AdminLayout";
+import { useHistory, Link } from "react-router-dom";
+import Layout from "./Layout";
 import DataList from "../../components/DataTable/DataTable";
 import { Space, Table, Row, Col, Grid } from "antd";
 
@@ -10,6 +11,7 @@ import { Student as StudentType } from "../admin/students/students.service";
 
 const StudentList = () => {
   const dispatch = useDispatch();
+  const history= useHistory();
   const students = useSelector(Student.selector);
 
   useEffect(() => {
@@ -21,30 +23,46 @@ const StudentList = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text:any, record:any) => (
-      <a href={`/evaluation/student-list/evaluate/${record.id}`}>{text}</a>
-      )
+      render: (text: any, record: any) => (
+        <Link to={`/evaluation/student-list/evaluate/${record.id}`}>
+          {text}
+        </Link>
+      ),
     },
     {
       title: "Action",
       key: "action",
       render: (text: any, record: any) => (
         <Space size="middle">
-          <a>Evaluate</a>
+          <a href="#">Evaluate</a>
         </Space>
       ),
     },
   ];
 
   return (
-    <AdminLayout>
-      <div className="container ">
-        <div className="content-layout">
-        <h1>Project in DM 1 - Progress 1</h1>
-          <Table columns={columns} dataSource={students.data} />
+    <Layout title="Student List">
+      <div className="container">
+        <div className="card-simple ">
+
+          <h2>Project in DM 1 - Progress 1</h2>
+          <p>Select the student name to evaluate</p>
+          <div style={{ marginTop: "3rem"}} />
+          <Table
+            columns={columns}
+            dataSource={students.data}
+            pagination={false}
+            onRow={(record, rowIndex) => {
+              return {
+                onClick: (event) => {
+                  history.push(`/evaluation/student-list/evaluate/${record.id}`);
+                }, // click row
+              };
+            }}
+          />
         </div>
       </div>
-    </AdminLayout>
+    </Layout>
   );
 };
 
