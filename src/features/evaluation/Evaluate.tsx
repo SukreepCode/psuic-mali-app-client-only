@@ -4,10 +4,12 @@ import DataList from "../../components/DataTable/DataTable";
 
 import { Form, Input, Button, Tag, Radio, Divider } from "antd";
 import { useHistory, useParams } from "react-router-dom";
+import { DM_TYPE } from "./string";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import * as Student from "../admin/students/students.slice";
+import * as Criteria from "../admin/criteria/criteria.slice";
 import { Student as StudentType } from "../admin/students/students.service";
 
 const { TextArea } = Input;
@@ -22,19 +24,26 @@ const tailLayout = {
 type AppProps = { message?: string };
 
 const Evaluate = ({ message }: AppProps) => {
-  let { id }: any = useParams();
+  let { id, dm_type, criteria_id }: any = useParams();
+  
   const dispatch = useDispatch();
   const [student, setStudent] = useState({
     id: "",
     name: "",
   });
+  const [criteriaTitle, setCriteriaTitle] = useState("");
 
   const getData = async () => {
-    const { data } = await dispatch(Student.fetch(id));
+    const [reponseStudent, reponseCriteria] = await Promise.all([
+      dispatch(Student.fetch(id)), 
+      dispatch(Criteria.fetch(criteria_id))
+    ]);
+
     setStudent({
-      id: data.id,
-      name: data.name,
+      id: reponseStudent.data.id,
+      name: reponseStudent.data.name,
     });
+    setCriteriaTitle(reponseCriteria.data.title);
   };
 
   useEffect(() => {
@@ -45,7 +54,7 @@ const Evaluate = ({ message }: AppProps) => {
     <Layout title="Evaluation Form">
         <div className="card-simple">
           <div style={{ maxWidth: "500px", margin: "0 auto" }}>
-            <h2>Project in DM 1 - Progress 1</h2>
+            <h2>{DM_TYPE[dm_type]} - {criteriaTitle}</h2>
             <p>You're evaluating {student.name}.</p>
 
             <div style={{ marginTop: "3rem" }}>

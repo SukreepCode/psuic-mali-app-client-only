@@ -34,7 +34,7 @@ const Overview = () => {
                 itemLayout="horizontal"
                 dataSource={dm1Criteria}
                 renderItem={(item) => (
-                  <Link  key={item.id} to="/evaluation/student-list">
+                  <Link  key={item.id} to={`/evaluation/dm1/c/${item.id}/student-list`}>
                     <div className="list-item">
                       <Row justify="space-between">
                         <div >{item.title}</div>
@@ -53,7 +53,7 @@ const Overview = () => {
                 itemLayout="horizontal"
                 dataSource={dm2Criteria}
                 renderItem={(item) => (
-                  <Link  key={item.id} to="/evaluation/student-list">
+                  <Link  key={item.id} to={`/evaluation/dm2/c/${item.id}/student-list`}>
                   <div className="list-item">
                     <Row justify="space-between">
                       <div >{item.title}</div>
